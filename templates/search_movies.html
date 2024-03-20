@@ -4,6 +4,23 @@
 
 {% block body %}
 <h1 class="mb-5">Search Movie Ratings</h1>
-<p class="mb-3">Search for a movie rating below</p>
-<!-- TODO: Feature 3 -->
+<form method="post">
+    <div class="form-group">
+        <label for="title">Movie Title:</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter movie title">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if results %}
+<br>
+<br>
+<h2>Search Results:</h2>
+<ul>
+    {% for movie in results %}
+    <li>{{ movie.title }} ★ Rating: {{ movie.rating }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}
