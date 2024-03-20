@@ -15,8 +15,10 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-    # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    # TODO: Feature 
+    movie_db = movie_repository.get_all_movies();
+    length = len(movie_db)
+    return render_template('list_all_movies.html', movies=movie_db, len=length, list_movies_active=True)
 
 
 @app.get('/movies/new')
