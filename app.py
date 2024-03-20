@@ -51,7 +51,12 @@ def get_edit_movies_page(movie_id: int):
 @app.post('/movies/<int:movie_id>')
 def update_movie(movie_id: int):
     # TODO: Feature 5
-    # After updating the movie in the database, we redirect back to that single movie page
+    movie = movie_repository.get_movie_by_id(movie_id)
+
+    if movie is None:
+        return "Movie not found", 404
+    
+    
     return redirect(f'/movies/{movie_id}')
 
 
