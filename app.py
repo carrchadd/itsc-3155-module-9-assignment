@@ -80,7 +80,11 @@ def update_movie(movie_id: int):
         return str(e), 404
 
 
-@app.post('/movies/<int:movie_id>/delete')
+@app.route('/movies/<int:movie_id>/delete', methods=['POST'])
 def delete_movie(movie_id: int):
-    # TODO: Feature 6
-    pass
+    old_movie = self._db.get(movie_id)
+    if not old_movie:
+        raise ValueError(f'movie with id {movie_id} not found')
+
+    # Remove the movie from the dictionary (or any other data store you're using)
+    del self._db[movie_id]
