@@ -62,6 +62,6 @@ def delete_movie(movie_id: int):
     old_movie = movie_repository.get_movie_by_id(movie_id)
     if not old_movie:
         raise ValueError(f'movie with id {movie_id} not found')
-        movie_repository.delete_movie(movie_id)
+    movie_repository.delete_movie(movie_id)
     # Remove the movie from the dictionary (or any other data store you're using)
     return redirect('/movies')
