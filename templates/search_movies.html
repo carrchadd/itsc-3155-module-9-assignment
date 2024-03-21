@@ -23,4 +23,9 @@
     {% endfor %}
 </ul>
 {% endif %}
+
+{% if not_found %}
+<p>Movie not found. Please try again.</p>
+{% endif %}
+
 {% endblock %}
