@@ -15,8 +15,9 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-    # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    movie_db = movie_repository.get_all_movies();
+    length = len(movie_db)
+    return render_template('list_all_movies.html', movies=movie_db, len=length, list_movies_active=True)
 
 
 @app.get('/movies/new')
@@ -47,14 +48,24 @@ def get_single_movie(movie_id: int):
 @app.get('/movies/<int:movie_id>/edit')
 def get_edit_movies_page(movie_id: int):
     movie = movie_repository.get_movie_by_id(movie_id)
-    return render_template('edit_movies_form.html', movie_id=movie_id, movie = movie)
+
+    if movie is None:
+        return "Movie not found", 404
+    
+    return render_template('edit_movies_form.html', movie=movie)
 
 
 @app.post('/movies/<int:movie_id>')
 def update_movie(movie_id: int):
-    # TODO: Feature 5
-    # After updating the movie in the database, we redirect back to that single movie page
-    return redirect(f'/movies/{movie_id}')
+    title = request.form['title']
+    director = request.form['director']
+    rating = int(request.form['rating'])
+
+    try:
+        movie = movie_repository.update_movie(movie_id, title, director, rating)
+        return redirect('/movies')
+    except ValueError as e:
+        return str(e), 404
 
 
 @app.post('/movies/<int:movie_id>/delete')

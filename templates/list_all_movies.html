@@ -7,4 +7,42 @@
 <p class="mb-3">See our list of movie ratings below</p>
 <!-- TODO: Feature 1 -->
 
+<table class="table mt-5 mx-auto w-70">
+
+    {% if len != 0 %}
+        <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Director</th>
+            <th scope="col">Rating</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+            {% for movie in movies %}
+                    <tr scope="row">
+                        <td >{{ movies[movie].title }}</td>
+                        <td>{{ movies[movie].director }}</td>
+                        <td>{{ movies[movie].rating }}</td>
+                        <td>
+                            <form action="/movies/{{ movies[movie].movie_id }}" method="get">
+                                <button class="btn btn-info">Expand</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/movies/{{ movies[movie].movie_id }}/edit" method="get">
+                                <button class="btn btn-warning">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/movies/{{ movies[movie].movie_id }}/delete" method="post">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+            {% endfor %}
+    {% else %}
+    <h1 class="mt-5 text-center">No Movies To Display</h1>
+    {% endif %}
+</table>
+
 {% endblock %}
