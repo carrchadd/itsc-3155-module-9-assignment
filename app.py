@@ -7,7 +7,6 @@ app = Flask(__name__)
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
 
-
 @app.get('/')
 def index():
     return render_template('index.html')
@@ -45,10 +44,17 @@ def create_movie():
     return redirect('/movies')
 
 
-@app.get('/movies/search')
+@app.route('/movies/search', methods=['GET', 'POST'])
 def search_movies():
     # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
+    if request.method == 'POST':
+        title = request.form.get('title')
+        movie = movie_repository.get_movie_by_title(title)
+        if movie:
+            results = [movie]
+        return render_template('search_movies.html', search_active=True, results=results)
+    else: 
+        return render_template('search_movies.html', search_active=True)
 
 
 @app.get('/movies/<int:movie_id>')
