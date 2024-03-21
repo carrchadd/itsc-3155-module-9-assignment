@@ -13,11 +13,21 @@
 <br>
 <h1 class="display-4">
     Rating: {{ movie.rating }}/5
-</h1>
+</h1><br>
 
-<form action="/movies/{{ movie.movie_id }}/edit" method="get">
-    <button class="btn btn-light">Edit</button>
-</form>
+<tr scope = "row">
+    <td>
+        <form action="/movies/{{ movie.movie_id }}/edit" method="get">
+            <button class="btn btn-warning">Edit</button>
+        </form>
+    </td><br>
+
+    <td>
+        <form action="/movies/{{ movie.movie_id }}/delete" method="post">
+            <button class="btn btn-danger">Delete</button>
+        </form>
+    </td>
+</tr>
 
 
 {% endblock %}
