@@ -52,7 +52,9 @@ def search_movies():
         movie = movie_repository.get_movie_by_title(title)
         if movie:
             results = [movie]
-        return render_template('search_movies.html', search_active=True, results=results)
+            return render_template('search_movies.html', search_active=True, results=results)
+        else:
+            return render_template('search_movies.html', search_active=True, not_found=True)
     else: 
         return render_template('search_movies.html', search_active=True)
 
