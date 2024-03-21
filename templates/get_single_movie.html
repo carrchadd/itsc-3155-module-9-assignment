@@ -5,4 +5,22 @@
 {% block body %}
 <h1 class="mb-5"></h1>
 <!-- TODO: Feature 4 -->
+
+<h1 class="display-3">
+    {{ movie.title }}
+    {{ movie.id }}   
+</h1>
+<h1 class="lead">
+    Director: {{ movie.director }}
+</h1>
+<br>
+<h1 class="display-4">
+    Rating: {{ movie.rating }}/5
+</h1>
+
+<form action="/movies/{{ movie.movie_id }}/edit" method="get">
+    <button class="btn btn-light">Edit</button>
+</form>
+
+
 {% endblock %}
